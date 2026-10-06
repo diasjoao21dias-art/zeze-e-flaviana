@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f4f4ed">
+<title>Osmar & Flaviana | Convite</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="intro-screen" id="intro">
+  <div class="flowers top"></div>
+  <div class="intro-inner">
+    <div class="monogram">OF</div>
+    <div class="script">Osmar & Flaviana</div>
+    <p>Um convite especial para um dia inesquecível</p>
+    <button onclick="abrirConvite()">Abrir convite <span>♡</span></button>
+  </div>
+  <div class="flowers bottom"></div>
+</div>
+
+<main id="convite" class="hidden">
+
+  <section class="hero">
+    <div class="petals" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="monogram reveal">OF</div>
+      <div class="verse reveal delay1">
+        “E, acima de tudo, tenham amor,<br>
+        pois o amor une perfeitamente todas as coisas.”
+        <small>Colossenses 3:14</small>
+      </div>
+      <div class="rings reveal delay2">♡</div>
+      <h1 class="script reveal delay2">Osmar <span>&</span> Flaviana</h1>
+      <p class="hero-text reveal delay3">
+        Com muita alegria, convidamos você para estar conosco
+        no dia em que diremos sim a uma vida inteira juntos.
+      </p>
+      <div class="scroll-hint reveal delay4">deslize para continuar ↓</div>
+    </div>
+  </section>
+
+  <section class="section date reveal-on-scroll">
+    <span class="eyebrow">NOSSO GRANDE DIA</span>
+    <div class="date-row">
+      <div><small>sábado</small></div>
+      <strong>24</strong>
+      <div><small>outubro<br>2026</small></div>
+    </div>
+    <p class="time">17:00h</p>
+    <div class="divider">✦</div>
+  </section>
+
+  <section class="section ceremony reveal-on-scroll">
+    <span class="eyebrow">CERIMÔNIA</span>
+    <h2>Um momento para guardar no coração</h2>
+    <p class="place">Igreja Nossa Senhora de Fátima</p>
+    <p>24 de outubro de 2026 · 17:00h</p>
+    <a class="button" href="https://www.google.com/maps/search/?api=1&query=Igreja+Nossa+Senhora+de+Fátima" target="_blank">
+      Abrir localização <span>↗</span>
+    </a>
+  </section>
+
+  <section class="floral-break">
+    <div class="floral-mark">❧ ❀ ❧</div>
+  </section>
+
+  <section class="section reception reveal-on-scroll">
+    <span class="eyebrow">RECEPÇÃO</span>
+    <h2>Depois da cerimônia,<br>vamos celebrar juntos.</h2>
+    <p class="place">Rua A, 65 — Boa Vista TV</p>
+    <p>Esperamos você para continuar essa celebração ao nosso lado.</p>
+    <div class="note">Obs.: Cada um levar sua bebida alcoólica.</div>
+  </section>
+
+  <section class="section countdown-section reveal-on-scroll">
+    <span class="eyebrow">FALTA POUCO</span>
+    <h2>Contagem regressiva</h2>
+    <div class="countdown">
+      <div><strong id="dias">00</strong><span>dias</span></div>
+      <div><strong id="horas">00</strong><span>horas</span></div>
+      <div><strong id="minutos">00</strong><span>min</span></div>
+      <div><strong id="segundos">00</strong><span>seg</span></div>
+    </div>
+  </section>
+
+  <section class="section confirm reveal-on-scroll">
+    <span class="eyebrow">CONFIRMAÇÃO</span>
+    <h2>Sua presença<br>vai nos alegrar.</h2>
+    <p>Confirme sua presença pelo WhatsApp.</p>
+    <a class="button dark" href="https://wa.me/?text=Olá!%20Gostaria%20de%20confirmar%20minha%20presença%20no%20evento%20de%20Osmar%20e%20Flaviana." target="_blank">
+      Confirmar presença <span>↗</span>
+    </a>
+  </section>
+
+  <section class="final">
+    <div class="flowers-small">❀</div>
+    <span class="eyebrow">COM CARINHO</span>
+    <h2 class="script">Osmar <span>&</span> Flaviana</h2>
+    <p>24 de outubro de 2026</p>
+    <div class="monogram">OF</div>
+  </section>
+
+  <footer>
+    <small>Convite digital</small>
+    <strong>Olivium Tecnologia</strong>
+  </footer>
+
+</main>
+
+<script>
+function abrirConvite() {
+  document.getElementById("intro").classList.add("closing");
+  setTimeout(() => {
+    document.getElementById("intro").remove();
+    document.getElementById("convite").classList.remove("hidden");
+    document.querySelectorAll(".reveal").forEach((el, i) => {
+      setTimeout(() => el.classList.add("active"), i * 100);
+    });
+  }, 700);
+}
+
+const dataEvento = new Date("2026-10-24T17:00:00-03:00").getTime();
+
+function atualizarContagem() {
+  let distancia = Math.max(0, dataEvento - Date.now());
+
+  const dias = Math.floor(distancia / 86400000);
+  distancia %= 86400000;
+  const horas = Math.floor(distancia / 3600000);
+  distancia %= 3600000;
+  const minutos = Math.floor(distancia / 60000);
+  distancia %= 60000;
+  const segundos = Math.floor(distancia / 1000);
+
+  document.getElementById("dias").textContent = String(dias).padStart(2, "0");
+  document.getElementById("horas").textContent = String(horas).padStart(2, "0");
+  document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
+  document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
+}
+atualizarContagem();
+setInterval(atualizarContagem, 1000);
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("active");
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal-on-scroll").forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
